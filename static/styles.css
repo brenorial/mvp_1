@@ -1,0 +1,168 @@
+body {
+    font-family: Montserrat, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #F4F4F7;
+}
+
+header {
+    background-color: #004A80;
+    text-align: center;
+    width: 100%;
+    padding: 6px 0;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.header-logo {
+    position: absolute;
+    left: 20px;  
+    top: 5%;
+    transform: translateY(-50%);
+}
+
+.header-logo img {
+    height: 80px; 
+    width: auto;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #FFFFFF;
+    height: 100vh;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background: #F8F9FC;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: #9496AF;
+}
+
+.sidebar li:hover {
+    background: #004A80;
+    color: #FFFFFF
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #052e4b;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    padding: 3px;
+    background-color: #004A80;
+}
+
+.close {
+    font-size: 25px;
+    color: #1d1d1d;
+    font-weight: bolder;
+}
+
+.close:hover {
+    color: #f44336;
+    font-weight: bolder;
+}
+
+.table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+th {
+    background-color: #F8F9FC;
+    font-weight: bold;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #F9FAFB;
+}
+
+tr:hover {
+    background-color: #EEF2FF;
+}
+
+.addBtn {
+    padding: 12px 20px;
+    background-color: #004A80;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.addBtn:hover {
+    background-color: #00BFF2;
+}
+
+input[type="text"] {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    background-color: #F8F9FC;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #004A80;
+    outline: none;
+}
+
+input[type="text"]:hover {
+    background-color: #E9ECEF;
+}
+
+#newInput {
+    width: 60%;
+}

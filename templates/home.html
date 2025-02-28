@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <header>
+        <div class="header-logo">
+            <img src="static\imagens\cobam_logo.png" alt="Logo" />
+        </div>
+        <div class="title">
+            <h1>Colégio Batista Memorial</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li>Página Inicial</li>
+                <li>Alunos</li>
+                <li>Matrículas</li>
+                <li>Turmas</li>
+                <li>Configurações</li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <h2>Inserção de Novas Matrículas</h2>
+            <section class="newItem">
+                <input type="text" id="newInput" placeholder="Nome Completo">
+                <input type="text" id="newQuantity" placeholder="Idade">
+                <input type="text" id="newPrice" placeholder="Série">
+                <button onclick="newItem()" class="addBtn">Adicionar</button>
+            </section>
+
+            <section class="items">
+                <table id="myTable">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Série</th>
+                        <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+                    </tr>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
