@@ -1,9 +1,10 @@
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, send_from_directory, render_template, redirect, session, render_template, url_for
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
-
+from flask_bcrypt import Bcrypt
 from model import Session, Produto
 from model.comentario import Comentario
+from model.usuario import Usuario
 
 
 app = Flask(__name__)
@@ -95,4 +96,55 @@ def get_produtos():
         {"nome": p.nome, "quantidade": p.quantidade, "valor": p.valor}
         for p in produtos
     ]
-    return {"produtos": produto_list}, 200
+    return {"produtos": produto_list}, 200 
+
+app.secret_key = "supersecretkey"  
+bcrypt = Bcrypt(app)
+
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        
+        senha_hash = bcrypt.generate_password_hash(senha).decode('utf-8')
+
+        session_db = Session()
+        novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
+
+        try:
+            session_db.add(novo_usuario)
+            session_db.commit()
+            return redirect(url_for('login'))
+        except IntegrityError:
+            session_db.rollback()
+            return "Email já cadastrado!", 400
+
+    return render_template('cadastro.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        senha = request.form['senha']
+
+        session_db = Session()
+        usuario = session_db.query(Usuario).filter_by(email=email).first()
+
+        if usuario and bcrypt.check_password_hash(usuario.senha, senha):
+            session['usuario_id'] = usuario.id
+            session['usuario_nome'] = usuario.nome
+            return redirect(url_for('home'))
+        else:
+            return "Email ou senha incorretos!", 401
+
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
