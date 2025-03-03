@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from model.base import Base
 from model.comentario import Comentario
 from model.produto import Produto
+from model.usuario import Usuario
 
 
 # url de acesso ao banco (essa é uma url de acesso ao sqlite local)
