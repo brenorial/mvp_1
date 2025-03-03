@@ -32,9 +32,7 @@ def add_produto():
         valor=request.form.get("valor")
     )
     try:
-        # adicionando produto
         session.add(produto)
-        # efetivando o camando de adição de novo item na tabela
         session.commit()
         return render_template("produto.html", produto=produto), 200
     except IntegrityError as e:
@@ -108,7 +106,10 @@ def cadastro():
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
-        
+
+        if not nome or not email or not senha:
+            return "Todos os campos são obrigatórios!", 400
+
         senha_hash = bcrypt.generate_password_hash(senha).decode('utf-8')
 
         session_db = Session()
@@ -117,10 +118,12 @@ def cadastro():
         try:
             session_db.add(novo_usuario)
             session_db.commit()
-            return redirect(url_for('login'))
+            return redirect(url_for('login')) 
         except IntegrityError:
             session_db.rollback()
             return "Email já cadastrado!", 400
+        except Exception as e:
+            return f"Erro inesperado: {str(e)}", 500 
 
     return render_template('cadastro.html')
 
@@ -142,7 +145,6 @@ def login():
             return "Email ou senha incorretos!", 401
 
     return render_template('login.html')
-
 
 @app.route('/logout')
 def logout():
